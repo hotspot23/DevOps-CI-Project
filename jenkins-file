@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install npm dependencies
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Start Services') {
+            steps {
+                script {
+                    // Start services using Docker Compose
+                    sh 'npm run compose:up'
+                }
+            }
+        }
+        stage('Run Integration Tests') {
+            steps {
+                script {
+                    // Run integration tests
+                    sh 'npm run test:integration'
+                }
+            }
+        }
+        stage('Run E2E Tests') {
+            steps {
+                script {
+                    // Run end-to-end tests
+                    sh 'npm run test:e2e'
+                }
+            }
+        }
+        stage('Stop Services') {
+            steps {
+                script {
+                    // Stop services using Docker Compose
+                    sh 'npm run compose:down'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up any workspace artifacts
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
