@@ -26,7 +26,7 @@ pipeline {
                         -Dsonar.sources=. \
                         -Dsonar.host.url=${SONAR_HOST_URL} \
                         -Dsonar.login=$SONAR_API_KEY \
-                        -X
+                        -Dsonar.sourceEncoding=UTF-8
                         """
                     }
                 }
