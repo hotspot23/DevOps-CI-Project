@@ -28,7 +28,7 @@ pipeline {
                         -Dsonar.login=$SONAR_API_KEY \
                         -Dsonar.sourceEncoding=UTF-8 \
                         -Dsonar.language=js,ts \
-                        -Dsonar.sources=./src
+                        -Dsonar.sources=./app/backend/src
                         """
                     }
                 }
